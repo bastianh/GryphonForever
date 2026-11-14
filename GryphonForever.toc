@@ -3,6 +3,7 @@
 ## Notes: Standalone Blizzard modern action bar art (gryphon/wyvern caps, border, slot backgrounds, dividers) as a movable backdrop for any buttons
 ## Author: bastianh
 ## Version: 1.0
+## X-License: MIT
 ## SavedVariables: GryphonForeverDB, GryphonBarDB
 
 Templates.xml

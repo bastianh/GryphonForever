@@ -34,3 +34,7 @@ covers exactly the button area, so other addons can anchor to it.
 | `/gb on`, `off`, `reset` | enable, disable, restore defaults |
 
 Settings are saved in `GryphonForeverDB`.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Blizzard art referenced by atlas name remains Blizzard's property.
