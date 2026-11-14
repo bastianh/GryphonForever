@@ -1,0 +1,9 @@
+## Interface: 16001, 120107, 120105, 120100, 50504, 20506, 11509
+## Title: Gryphon Forever
+## Notes: Standalone Blizzard modern action bar art (gryphon/wyvern caps, border, slot backgrounds, dividers) as a movable backdrop for any buttons
+## Author: bastianh
+## Version: 1.0
+## SavedVariables: GryphonForeverDB, GryphonBarDB
+
+Templates.xml
+GryphonForever.lua
