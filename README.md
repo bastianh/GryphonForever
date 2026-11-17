@@ -29,6 +29,7 @@ covers exactly the button area, so other addons can anchor to it.
 | `/gb tint <r> <g> <b>` / `off` / `reset` | colour multiplier for the grey border and dividers (default bronze) |
 | `/gb faction auto\|alliance\|horde` | gryphon or wyvern caps |
 | `/gb strata background\|low\|medium` | frame strata |
+| `/gb capstrata background|low|medium|high|dialog` | strata of the gryphon/wyvern caps (own frame, default low) |
 | `/gb unlock`, `/gb lock` | drag to move, then lock |
 | `/gb pos <x> <y>`, `/gb flush` | numeric position / flush with the screen bottom |
 | `/gb on`, `off`, `reset` | enable, disable, restore defaults |

@@ -19,13 +19,14 @@ local DEFAULTS = {
 	slotart = true,
 	dividers = true,
 	faction = "auto",   -- auto | alliance | horde
-	strata = "BACKGROUND",
+	strata = "LOW",
+	capStrata = "LOW", -- caps live in their own frame so they can sit above e.g. the XP bar
 }
 
 local BASE = 45 -- Blizzard's native slot size; caps/border/dividers scale with size / BASE
 
 local db
-local art, border, leftCap, rightCap, mover
+local art, capFrame, border, leftCap, rightCap, mover
 local slotTex, dividers = {}, {}
 
 local function Print(msg)
@@ -52,8 +53,10 @@ local function Create()
 
 	border = CreateFrame("Frame", nil, art, "GryphonForeverBorderTemplate")
 	border:SetFrameLevel(art:GetFrameLevel() + 2)
-	leftCap = art:CreateTexture(nil, "OVERLAY")
-	rightCap = art:CreateTexture(nil, "OVERLAY")
+	capFrame = CreateFrame("Frame", nil, art)
+	capFrame:SetAllPoints(art)
+	leftCap = capFrame:CreateTexture(nil, "OVERLAY")
+	rightCap = capFrame:CreateTexture(nil, "OVERLAY")
 
 	mover = art:CreateTexture(nil, "OVERLAY", nil, 7)
 	mover:SetAllPoints()
@@ -104,6 +107,8 @@ local function Refresh()
 	local cols = math.ceil(db.slots / rows)
 
 	art:SetFrameStrata(db.strata)
+	capFrame:SetFrameStrata(db.capStrata)
+	capFrame:SetFrameLevel(100)
 	art:SetScale(db.scale)
 	art:ClearAllPoints()
 	art:SetPoint(db.point, UIParent, db.relPoint, db.x, db.y)
@@ -129,14 +134,14 @@ local function Refresh()
 		leftCap:SetSize(154 * s, 95 * s)
 		rightCap:SetSize(154 * s, 95 * s)
 		leftCap:ClearAllPoints()
-		leftCap:SetPoint("BOTTOMRIGHT", art, "BOTTOMLEFT", 32 * s, -4 * s)
+		leftCap:SetPoint("BOTTOMRIGHT", art, "BOTTOMLEFT", 32 * s, -9 * s)
 		rightCap:ClearAllPoints()
-		rightCap:SetPoint("BOTTOMLEFT", art, "BOTTOMRIGHT", -28 * s, -4 * s)
+		rightCap:SetPoint("BOTTOMLEFT", art, "BOTTOMRIGHT", -28 * s, -9 * s)
 		leftCap:Show()
 		rightCap:Show()
+		capFrame:Show()
 	else
-		leftCap:Hide()
-		rightCap:Hide()
+		capFrame:Hide()
 	end
 
 	-- slots and dividers
@@ -225,6 +230,13 @@ SlashCmdList["GRYPHONFOREVER"] = function(msg)
 	elseif cmd == "on" or cmd == "off" then
 		db.enabled = (cmd == "on")
 		Refresh()
+	elseif cmd == "capstrata" then
+		local v = arg:upper()
+		if v == "BACKGROUND" or v == "LOW" or v == "MEDIUM" or v == "HIGH" or v == "DIALOG" then
+			db.capStrata = v
+			Refresh()
+		end
+		Print("capstrata = " .. db.capStrata .. " (background|low|medium|high|dialog)")
 	elseif cmd == "unlock" then
 		SetLocked(false)
 	elseif cmd == "lock" then
